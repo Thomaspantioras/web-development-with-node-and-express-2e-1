@@ -3,7 +3,10 @@ const fs = require('fs')
 const port = process.env.PORT || 3000
 
 function serveStaticFile(res, path, contentType, responseCode = 200) {
+   //__dirname will resolve to the directory the executing script resides in.
+  // data is the contents of the file.
   fs.readFile(__dirname + path, (err, data) => {
+    //if the file didn’t exist or there were permissions issues reading the file
     if(err) {
       res.writeHead(500, { 'Content-Type': 'text/plain' })
       return res.end('500 - Internal Error')
